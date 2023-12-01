@@ -1,19 +1,13 @@
-import kotlin.io.path.Path
-import kotlin.io.path.readLines
+package dev.schlaubi.aoc2023
 
-fun main() {
-    val input = Path("inputs/input1.txt").readLines()
+object Day1 : AoCDay {
+    override fun performTask1(input: String): Long = input.lines().processLines().toLong()
 
-    val result1 = input.processLines()
-    val result2 = input.processLines(String::transformWordNumbersToNumeric)
-
-
-    println("Result 1: $result1")
-    println("Result 2: $result2")
+    override fun performTask2(input: String): Long = input.lines().processLines(String::transformWordNumbersToNumeric).toLong()
 }
 
 
-fun Iterable<String>.processLines(preProcess: String.() -> String = { this }) = sumOf {
+inline fun Iterable<String>.processLines(preProcess: String.() -> String = { this }) = sumOf {
     val chars = preProcess(it).toCharArray()
         .filter(Char::isDigit)
 

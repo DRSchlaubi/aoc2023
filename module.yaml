@@ -1,5 +1,9 @@
 product: jvm/app
 
+test-dependencies:
+  -   $kotlin-test-junit5
+
 settings:
+  junit: junit-5
   kotlin:
     languageVersion: 1.9
