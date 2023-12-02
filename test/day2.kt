@@ -1,5 +1,4 @@
-import dev.schlaubi.aoc2023.AoCDay
-import dev.schlaubi.aoc2023.AoCTest
+package dev.schlaubi.aoc2023
 
 class Day2Test : AoCTest() {
     override val fileName: String = "input2.txt"

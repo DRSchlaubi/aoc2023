@@ -1,4 +1,5 @@
-import dev.schlaubi.aoc2023.AoCDay
+package dev.schlaubi.aoc2023
+
 import kotlin.math.max
 
 
