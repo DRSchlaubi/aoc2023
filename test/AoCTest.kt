@@ -19,24 +19,23 @@ abstract class AoCTest {
     abstract val logic: AoCDay
     
     @Test
-    fun `test example for task 1`() = runTimed { assertEquals(task1ExampleResult, logic.performTask1(task1ExampleInput)) }
+    fun `test example for task 1`() = runTest(task1ExampleResult) { logic.performTask1(task1ExampleInput) }
 
     @Test
-    fun `test example for task 2`() = runTimed { assertEquals(task2ExampleResult, logic.performTask2(task2ExampleInput)) }
+    fun `test example for task 2`() = runTest(task2ExampleResult) { logic.performTask2(task2ExampleInput) }
 
     @Test
-    fun `test task 1`() = runTimed { assertEquals(task1Result, logic.performTask1(readInput())) }
+    fun `test task 1`() = runTest(task1Result) { logic.performTask1(readInput()) }
 
     @Test
-    fun `test task 2`() = runTimed { assertEquals(task2Result, logic.performTask2(readInput())) }
+    fun `test task 2`() = runTest(task2Result) { logic.performTask2(readInput()) }
 
-    private inline fun <T> runTimed(block: () -> T): T {
+    private inline fun <T> runTest(expexted: T, block: () -> T) {
         val value = measureTimedValue(block)
 
         println("Took: ${value.duration}")
         println("Result: ${value.value}")
-
-        return value.value
+        assertEquals(expexted, value.value)
     }
 
     private fun readInput() = Path("inputs/$fileName").readText()
