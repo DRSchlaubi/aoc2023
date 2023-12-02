@@ -11,7 +11,8 @@ abstract class AoCTest {
     abstract val task1ExampleInput: String
     abstract val task1ExampleResult: Long
     abstract val task1Result: Long
-    abstract val task2ExampleInput: String
+    open val task2ExampleInput: String
+        get() = task1ExampleInput
     abstract val task2ExampleResult: Long
     abstract val task2Result: Long
 
