@@ -34,6 +34,7 @@ abstract class AoCTest {
         val value = measureTimedValue(block)
 
         println("Took: ${value.duration}")
+        println("Result: ${value.value}")
 
         return value.value
     }
