@@ -32,31 +32,24 @@ object Day3 : AoCDay {
             }
         }
 
-        return numbers.mapNotNull { grid.anyNeighbourIsntDot(it)?.let { symbol -> ValidNumber(symbol, it) } }
+        return numbers.mapNotNull {
+            val symbol = it.adjecentPoints.firstOrNull { (x, y) ->
+                val point = grid.getOrNull(y)?.getOrNull(x) ?: return@firstOrNull false
+                point != '.' && !point.isDigit()
+            } ?: return@mapNotNull null
+
+            ValidNumber(symbol, it)
+        }.also { println(it.map {it.number}) }
     }
 }
 
-private fun List<List<Char>>.anyNeighbourIsntDot(number: Number): Pair<Int, Int>? {
-    fun check(x: Int, y: Int): Pair<Int, Int>? {
-        val char = getOrNull(y)?.getOrNull(x) ?: return null
-
-        return (x to y).takeIf { char != '.' && !char.isDigit() }
-    }
-
-    fun checkWidth(y: Int): Pair<Int, Int>? {
-        for (x in 0 until number.width) {
-            return check(number.startX + x, y) ?: continue
+private val Number.adjecentPoints: Sequence<Pair<Int, Int>>
+    get() = sequence {
+        yield(startX - 1 to y)
+        yield(endX + 1 to y)
+        // -1 to +1 is for diagonal matches
+        for (x in -1 until width + 1) {
+            yield(startX + x to y - 1)
+            yield(startX + x to y + 1)
         }
-
-        return null
     }
-
-    return check(number.endX + 1, number.y) // right
-            ?: check(number.startX - 1, number.y) // left 
-            ?: check(number.startX - 1, number.y - 1) // bottom left 
-            ?: check(number.startX - 1, number.y + 1) // top left 
-            ?: check(number.endX + 1, number.y + 1) // top right 
-            ?: check(number.endX + 1, number.y - 1) // bottom right
-            ?: checkWidth(number.y + 1) // top row
-            ?: checkWidth(number.y - 1) // bottom row
-}
