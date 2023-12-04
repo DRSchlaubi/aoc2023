@@ -13,7 +13,7 @@ class Day4Test : AoCTest() {
     override val task1ExampleResult: Long = 13
     override val task1Result: Long = 21138
     override val task2ExampleResult: Long = 30
-    override val task2Result: Long = -1
+    override val task2Result: Long = 7185540
     override val logic: AoCDay = Day4
 
 }

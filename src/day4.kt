@@ -2,7 +2,6 @@ package dev.schlaubi.aoc2023
 
 
 private val whiteSpace = "\\s+".toRegex()
-private val cardId = "Card (\\d+):".toRegex()
 
 private data class Card(val id: Int, val myNumbers: List<Int>, val winningNumbers: List<Int>) {
     val myWinningNumbers = myNumbers.filter { number -> number in winningNumbers }
