@@ -6,7 +6,7 @@ private data class Number(val y: Int, val startX: Int, val endX: Int, val value:
 
 private data class ValidNumber(val symbol: Pair<Int, Int>, val number: Number)
 
-private val nonDigitRegex = "\\d+".toRegex()
+private val digitRegex = "\\d+".toRegex()
 
 object Day3 : AoCDay {
     override fun performTask1(input: String): Long = process(input).sumOf { it.number.value }.toLong()
@@ -23,7 +23,7 @@ object Day3 : AoCDay {
         val grid = input.lines().reversed()
 
         val numbers = grid.flatMapIndexed { y: Int, row ->
-            nonDigitRegex.findAll(row).map {
+            digitRegex.findAll(row).map {
                 val value = it.value.toInt()
                 Number(y, it.range.first, it.range.last, value)
             }
