@@ -39,7 +39,7 @@ object Day3 : AoCDay {
             } ?: return@mapNotNull null
 
             ValidNumber(symbol, it)
-        }.also { println(it.map {it.number}) }
+        }
     }
 }
 
