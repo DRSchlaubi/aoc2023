@@ -20,13 +20,10 @@ object Day3 : AoCDay {
 
 
     private fun process(input: String): List<ValidNumber> {
-        val grid = input.lines().reversed().map {
-            it.toList()
-        }
+        val grid = input.lines().reversed()
 
-        val numbers = grid.flatMapIndexed { y: Int, row: List<Char> ->
-            val line = row.joinToString("")
-            nonDigitRegex.findAll(line).map {
+        val numbers = grid.flatMapIndexed { y: Int, row ->
+            nonDigitRegex.findAll(row).map {
                 val value = it.value.toInt()
                 Number(y, it.range.first, it.range.last, value)
             }
