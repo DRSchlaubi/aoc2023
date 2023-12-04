@@ -9,12 +9,12 @@ import kotlin.time.measureTimedValue
 abstract class AoCTest {
     abstract val fileName: String
     abstract val task1ExampleInput: String
-    abstract val task1ExampleResult: Long
-    abstract val task1Result: Long
+    abstract val task1ExampleResult: Any
+    abstract val task1Result: Any
     open val task2ExampleInput: String
         get() = task1ExampleInput
-    abstract val task2ExampleResult: Long
-    abstract val task2Result: Long
+    abstract val task2ExampleResult: Any
+    abstract val task2Result: Any
 
     abstract val logic: AoCDay
     

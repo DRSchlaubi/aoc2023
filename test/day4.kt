@@ -10,10 +10,10 @@ class Day4Test : AoCTest() {
     Card 5: 87 83 26 28 32 | 88 30 70 12 93 22 82 36
     Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11
     """.trimIndent()
-    override val task1ExampleResult: Long = 13
-    override val task1Result: Long = 21138
-    override val task2ExampleResult: Long = 30
-    override val task2Result: Long = 7185540
+    override val task1ExampleResult: Int = 13
+    override val task1Result: Int = 21138
+    override val task2ExampleResult: Int = 30
+    override val task2Result: Int = 7185540
     override val logic: AoCDay = Day4
 
 }

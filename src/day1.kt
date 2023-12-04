@@ -1,9 +1,9 @@
 package dev.schlaubi.aoc2023
 
 object Day1 : AoCDay {
-    override fun performTask1(input: String): Long = input.lines().processLines().toLong()
+    override fun performTask1(input: String): Int = input.lines().processLines()
 
-    override fun performTask2(input: String): Long = input.lines().processLines(String::transformWordNumbersToNumeric).toLong()
+    override fun performTask2(input: String): Int = input.lines().processLines(String::transformWordNumbersToNumeric)
 }
 
 

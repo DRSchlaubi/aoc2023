@@ -14,10 +14,10 @@ class Day3Test : AoCTest() {
     ...$.*....
     .664.598..
     """.trimIndent()
-    override val task1ExampleResult: Long = 4361
-    override val task2ExampleResult: Long = 467835
-    override val task1Result: Long = 550934
-    override val task2Result: Long = 81997870
+    override val task1ExampleResult: Int = 4361
+    override val task2ExampleResult: Int = 467835
+    override val task1Result: Int = 550934
+    override val task2Result: Int = 81997870
     override val logic: AoCDay = Day3
 
 }

@@ -13,9 +13,9 @@ private data class Card(val id: Int, val myNumbers: List<Int>, val winningNumber
 }
 
 object Day4 : AoCDay {
-    override fun performTask1(input: String): Long = process(input).sumOf(Card::score).toLong()
+    override fun performTask1(input: String): Int = process(input).sumOf(Card::score)
 
-    override fun performTask2(input: String): Long {
+    override fun performTask2(input: String): Int {
         val cards = process(input)
         val copies = cards.associateTo(HashMap()) { it.id to 1 }
         for (card in cards) {
@@ -25,7 +25,7 @@ object Day4 : AoCDay {
                 copies[nextId] = copies.getValue(nextId) + currentCopies
             }
         }
-        return copies.values.sum().toLong()
+        return copies.values.sum()
     }
 
     private fun process(input: String) = input.lines().mapIndexed { index, it ->

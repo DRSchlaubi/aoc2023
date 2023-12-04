@@ -9,14 +9,13 @@ private data class ValidNumber(val symbol: Pair<Int, Int>, val number: Number)
 private val digitRegex = "\\d+".toRegex()
 
 object Day3 : AoCDay {
-    override fun performTask1(input: String): Long = process(input).sumOf { it.number.value }.toLong()
+    override fun performTask1(input: String): Int = process(input).sumOf { it.number.value }
 
-    override fun performTask2(input: String): Long = process(input)
+    override fun performTask2(input: String): Int = process(input)
             .groupBy(ValidNumber::symbol)
             .filter { (_, values) -> values.size == 2 }
             .map { (_, values) -> values }
             .sumOf { (first, last) -> first.number.value * last.number.value }
-            .toLong()
 
 
     private fun process(input: String): List<ValidNumber> {

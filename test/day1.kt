@@ -8,8 +8,8 @@ class Day1Test : AoCTest() {
     a1b2c3d4e5f
     treb7uchet
     """.trimIndent()
-    override val task1ExampleResult: Long = 142
-    override val task1Result: Long = 55834
+    override val task1ExampleResult: Int = 142
+    override val task1Result: Int = 55834
     override val task2ExampleInput: String = """
     two1nine
     eightwothree
@@ -19,8 +19,8 @@ class Day1Test : AoCTest() {
     zoneight234
     7pqrstsixteen
     """.trimIndent()
-    override val task2ExampleResult: Long = 281
-    override val task2Result: Long = 53221
+    override val task2ExampleResult: Int = 281
+    override val task2Result: Int = 53221
     override val logic: AoCDay = Day1
 
 }
