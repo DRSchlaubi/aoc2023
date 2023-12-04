@@ -4,7 +4,19 @@ private data class Number(val y: Int, val startX: Int, val endX: Int, val value:
     val width get() = endX - startX + 1
 }
 
-private data class ValidNumber(val symbol: Pair<Int, Int>, val number: Number)
+private data class Symbol(val character: Char, val coordinates: Pair<Int, Int>) {
+    override fun hashCode(): Int = coordinates.hashCode()
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Symbol
+
+        return coordinates == other.coordinates
+    }
+}
+private data class ValidNumber(val symbol: Symbol, val number: Number)
 
 private val digitRegex = "\\d+".toRegex()
 
@@ -12,6 +24,8 @@ object Day3 : AoCDay {
     override fun performTask1(input: String): Int = process(input).sumOf { it.number.value }
 
     override fun performTask2(input: String): Int = process(input)
+            .asSequence()
+            .filter { it.symbol.character == '*' }
             .groupBy(ValidNumber::symbol)
             .filter { (_, values) -> values.size == 2 }
             .map { (_, values) -> values }
@@ -29,10 +43,11 @@ object Day3 : AoCDay {
         }
 
         return numbers.mapNotNull {
-            val symbol = it.adjecentPoints.firstOrNull { (x, y) ->
-                val point = grid.getOrNull(y)?.getOrNull(x) ?: return@firstOrNull false
-                point != '.' && !point.isDigit()
-            } ?: return@mapNotNull null
+            val symbol = it.adjecentPoints.mapNotNull map@{ (x, y) ->
+                val point = grid.getOrNull(y)?.getOrNull(x) ?: return@map null
+                val symbol = point.takeIf { point != '.' && !point.isDigit() }?: return@map null
+                Symbol(symbol, x to y)
+            }.firstOrNull() ?: return@mapNotNull null
 
             ValidNumber(symbol, it)
         }
