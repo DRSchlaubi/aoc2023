@@ -6,6 +6,7 @@ tasks {
     withType<KotlinJvmTest> {
         useJUnitPlatform()
 
+        maxHeapSize = "5G"
         testLogging {
             events(TestLogEvent.FAILED, TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.STANDARD_OUT)
 
