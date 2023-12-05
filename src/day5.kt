@@ -6,9 +6,9 @@ private val mapSeperator = "(\\w+)-to-(\\w+) map:".toRegex()
 
 private data class MapLine(val sourceStart: Long, val destinationStart: Long, val length: Long) {
     val sourceRange: LongRange
-        get() = sourceStart..(sourceStart + length)
+        get() = sourceStart until(sourceStart + length)
     val destinationRange: LongRange
-        get() = destinationStart..(destinationStart + length)
+        get() = destinationStart until(destinationStart + length)
 }
 
 private data class Range(val start: Long, val length: Long) {
@@ -38,8 +38,7 @@ object Day5 : AoCDay {
                     val mapLine = currentMap.firstOrNull {
                         val sourceRange = it.sourceRange
 
-                        sourceRange.first <= range.last && sourceRange.last >= range.last
-
+                        sourceRange.first <= range.last && sourceRange.last >= range.first
                     }
                     if (mapLine == null) {
                         add(currentRange)
@@ -51,16 +50,16 @@ object Day5 : AoCDay {
                     val windowBacklog = (range.last - mapLine.sourceRange.last).coerceAtLeast(0)
                     val rangeDifference = mapLine.destinationStart - mapLine.sourceStart
 
-                    if (range.first + windowStart + rangeDifference == 0L) {
-                        continue // I have no idea Why, but this fixes everything
-                    }
-                    add(Range(range.first + windowStart + rangeDifference, currentRange.length - windowBacklog))
+                    val overlap = Range(range.first + windowStart, currentRange.length - windowBacklog)
+
+                    add(overlap.copy(start = overlap.start + rangeDifference))
+                    val windowEnd = overlap.range.last
 
                     if (mapLine.sourceRange.first > range.first) {
                         rangeIterator.add(Range(range.first, mapLine.sourceStart - range.first))
                     }
                     if (windowBacklog != 0L) {
-                        rangeIterator.add(Range(range.last, windowBacklog))
+                        rangeIterator.add(Range(windowEnd + 1, windowBacklog))
                     }
 
                 }
