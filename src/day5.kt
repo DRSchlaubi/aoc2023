@@ -25,7 +25,7 @@ object Day5 : AoCDay {
 
     override fun performTask2(input: String): Any {
         val (seedsRaw, maps) = process(input)
-        val seeds = seedsRaw.windowed(2, step = 2).map { (start, length) -> Range(start.toLong(), length.toLong()) }.toMutableList()
+        val seeds = seedsRaw.chunked(2).map { (start, length) -> Range(start.toLong(), length.toLong()) }.toMutableList()
 
         return maps.fold(seeds) { currentSeeds, currentMap ->
             val rangeIterator = currentSeeds.mutableListIterator()
