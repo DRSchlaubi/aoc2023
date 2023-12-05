@@ -6,9 +6,7 @@ private val mapSeperator = "(\\w+)-to-(\\w+) map:".toRegex()
 
 private data class MapLine(val sourceStart: Long, val destinationStart: Long, val length: Long) {
     val sourceRange: LongRange
-        get() = sourceStart until(sourceStart + length)
-    val destinationRange: LongRange
-        get() = destinationStart until(destinationStart + length)
+        get() = sourceStart until (sourceStart + length)
 }
 
 private data class Range(val start: Long, val length: Long) {
@@ -25,7 +23,7 @@ object Day5 : AoCDay {
 
     override fun performTask2(input: String): Any {
         val (seedsRaw, maps) = process(input)
-        val seeds = seedsRaw.chunked(2).map { (start, length) -> Range(start.toLong(), length.toLong()) }.toMutableList()
+        val seeds = seedsRaw.chunked(2).map { (start, length) -> Range(start, length) }.toMutableList()
 
         return maps.fold(seeds) { currentSeeds, currentMap ->
             val rangeIterator = currentSeeds.mutableListIterator()
@@ -68,7 +66,7 @@ object Day5 : AoCDay {
     }
 
 
-    private fun Sequence<Long>.mapWith(maps: Iterable<List<MapLine>>) = minOf {
+    private fun Sequence<Long>.mapWith(maps: Iterable<List<MapLine>>) = minOf { it ->
         maps.fold(it) { acc, currentMap ->
             val mapLine = currentMap.firstOrNull { acc in it.sourceRange } ?: return@fold acc
 
