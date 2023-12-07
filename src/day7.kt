@@ -39,8 +39,7 @@ private fun List<PokerCard>.compareTo(other: List<PokerCard>, withJoker: Boolean
 private fun List<PokerCard>.jokerScore(): Int {
     if (PokerCard.J in this) {
         return PokerCard.entries.maxOf { replaceCard ->
-            val withCard = toMutableList()
-            withCard.replaceAll {
+            val withCard = map {
                 if (it == PokerCard.J) replaceCard else it
             }
             withCard.calculateScore()
@@ -48,6 +47,8 @@ private fun List<PokerCard>.jokerScore(): Int {
     }
     return calculateScore()
 }
+
+
 
 private fun List<PokerCard>.calculateScore(): Int {
     val distinct = distinct()
