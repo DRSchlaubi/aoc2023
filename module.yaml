@@ -1,5 +1,8 @@
 product: jvm/app
 
+dependencies:
+    - org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3
+
 test-dependencies:
   - $kotlin-test-junit5
 
