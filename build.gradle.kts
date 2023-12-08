@@ -5,6 +5,7 @@ import org.jetbrains.kotlin.gradle.targets.jvm.tasks.KotlinJvmTest
 tasks {
     withType<KotlinJvmTest> {
         useJUnitPlatform()
+        maxParallelForks = Runtime.getRuntime().availableProcessors()
 
         testLogging {
             events(TestLogEvent.FAILED, TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.STANDARD_OUT)
